@@ -11,6 +11,11 @@ A Twitter Developer account is required to obtain a Bearer Token to access the S
 - Spaces search API Reference  https://developer.twitter.com/en/docs/twitter-api/spaces/search/api-reference/get-spaces-search
 
 
+### App
+
+The `/app` folder contains the Node app. Run `npm install` to install the dependencies. [`cron`, `dotenv` & `needle`]
+
+
 -----
 
 @blims 
