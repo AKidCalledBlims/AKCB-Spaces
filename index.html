@@ -1,0 +1,382 @@
+<!--
+    Display latest live and upcoming Twitter Spaces with AKCB in their title.
+    No libraries or frameworks.
+    @blims - #BAGMI, BEASTS! 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The latest live and upcoming #AKCB Twitter Spaces">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GZYRETCWTX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-GZYRETCWTX');
+    </script>
+     <meta property="og:site_name" content="a KID called BEAST | Twitter Spaces | #AKCB">
+     <meta property="og:title" content="a KID called BEAST | Twitter Spaces | #AKCB">
+     <meta property="og:type" content="website">
+     <meta property="og:description" content="The latest live and upcoming #AKCB Twitter Spaces">
+     <meta property="og:image" content="https://bli.ms/beast/AKCB_SPACES.jpg">
+     <meta property="og:url" content="https://bli.ms/beast">
+     <meta name="twitter:card" content="summary_large_image">
+     <meta name="twitter:site" content="@akidcalledbeast">
+     <meta name="twitter:title" content="a KID called BEAST | Twitter Spaces | #AKCB">
+     <meta name="twitter:description" content="The latest live and upcoming #AKCB Twitter Spaces">
+     <meta name="twitter:image" content="https://bli.ms/beast/AKCB_SPACES.jpg">
+
+    <title>a KID called BEAST | Twitter Spaces | #AKCB</title>
+    <style>
+        body {
+            background: #272727;
+            color: #e4e2df;
+            font-family: Arial, sans;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        a:hover {
+            opacity: 0.6;
+        }
+
+        .logo-cont {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: fit-content;
+            height: 16px;
+            display: flex;
+            color: #e4e2df;
+        }
+
+        .comm {
+            user-select: none;
+            margin: 0 auto;
+            width: fit-content;
+            font-size: 0.6rem;
+            margin-top: 10px;
+            opacity: 0.5;
+            letter-spacing: 0.15rem;
+        }
+
+        .main {
+            margin: 0 auto;
+            margin-top: 40px;
+            width: fit-content;
+        }
+
+        .main>.twitter-spaces {
+            font-size: 0.7rem;
+            letter-spacing: 0.15rem;
+            text-align: center;
+        }
+
+        #spaces {
+            margin-top: 20px;
+            /* border: 1px solid #999; */
+            /* text-align: center; */
+        }
+
+        .space {
+            border-top: 1px solid #999;
+            padding: 20px 15px 20px 15px;
+        }
+
+        .space:last-child {
+            border-bottom: 1px solid #999;
+        }
+
+        .space.live {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            text-transform: uppercase;
+            font-size: 1rem;
+            padding: 0 0 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .co-hosts-head {
+            font-size: 0.6rem;
+            opacity: 0.8;
+            text-align: right;
+            margin: 8px 0 3px;
+        }
+
+        .host,
+        .co-host {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+            text-align: right;
+        }
+
+        .host {
+            font-weight: bold;
+        }
+
+        .co-host {
+            text-align: right;
+        }
+
+        .host>span {
+            text-align: right;
+            opacity: 0.8;
+            font-weight: normal;
+            font-size: 0.6rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .starting {
+            font-size: 0.7rem;
+        }
+
+        .started {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 3px;
+        }
+
+        .participants {
+            /* text-align: right; */
+            font-size: 0.7rem;
+            margin-top: 10px;
+        }
+
+        .participants span {
+            color: red;
+            font-weight: bold;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+
+        .bagmi {
+            user-select: none;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 80px;
+            margin-bottom: -80px;
+            /* position: absolute;
+            bottom: 40px; */
+            font-size: 0.7rem;
+
+        }
+
+        .hash-bagmi {
+            user-select: none;
+            opacity: 0.8;
+            font-size: 0.8rem;
+        }
+
+        .labs {
+            user-select: none;
+            opacity: 0.5;
+            margin-top: 8px;
+            font-size: 0.5rem;
+        }
+
+        .link {
+            margin-top: 10px;
+        }
+
+        .beasts {
+            position: relative;
+            z-index: -1;
+            width: 100%;
+        }
+
+        .beasts>img {
+            width: 100%;
+        }
+
+        .state {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            color: #ffffcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="logo-cont">
+        <div class="logo-kid-called">
+            <svg height="100%" viewBox="0 0 121 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M34.2657 0.442871H29.1274L21.3376 8.64064V0.442871H17.2322V20.4013H21.3376V13.384L23.464 11.2705L29.9693 20.4013H34.9817L26.2979 8.51913L34.2657 0.442871Z"
+                    fill="currentColor"></path>
+                <path d="M42.0942 0.442871H37.9888V20.4013H42.0942V0.442871Z" fill="currentColor"></path>
+                <path
+                    d="M54.1936 0.443059H46.3821V20.4059H53.0826C54.5129 20.4398 55.9417 20.294 57.3356 19.9719C58.3238 19.7089 59.2471 19.245 60.0479 18.6092C61.1322 17.7189 61.9653 16.5611 62.4652 15.2503C63.0472 13.7093 63.33 12.0714 63.2984 10.4245C63.2984 7.0655 62.5462 4.55858 61.0417 2.90369C59.5373 1.2488 57.2546 0.428593 54.1936 0.443059ZM57.8303 15.298C56.9624 16.3005 55.5997 16.7952 53.6945 16.7952H50.4007V3.95391H54.1936C55.8832 3.95391 57.1258 4.47757 57.9214 5.5249C58.7171 6.57222 59.1149 8.2112 59.1149 10.4418C59.1149 12.6724 58.6867 14.2912 57.8303 15.298Z"
+                    fill="currentColor"></path>
+                <path
+                    d="M8.03556 15.0503C7.95465 14.8131 7.91931 14.5628 7.93141 14.3125V9.82524C7.94684 9.49676 7.87459 9.17008 7.72206 8.87875C7.56953 8.58742 7.34222 8.34192 7.06346 8.16746C6.28877 7.73933 5.40819 7.54063 4.52471 7.59462C3.67957 7.54405 2.84323 7.78958 2.15955 8.28898C1.87527 8.51592 1.64851 8.80671 1.4977 9.13773C1.3469 9.46876 1.27628 9.83068 1.29161 10.1941V10.3417H3.26185V10.2245C3.2563 10.0839 3.28501 9.94413 3.34548 9.81713C3.40596 9.69012 3.49641 9.57972 3.60903 9.49542C3.90099 9.30964 4.24446 9.2215 4.58981 9.24372C4.93426 9.2154 5.27952 9.28777 5.58361 9.45203C5.68783 9.53132 5.77005 9.63593 5.82246 9.75594C5.87487 9.87595 5.89573 10.0074 5.88305 10.1377C5.88305 10.537 5.44908 10.7973 4.53773 10.9145C4.18621 10.9579 3.89979 10.997 3.66978 11.0317C2.92418 11.0919 2.21303 11.3712 1.62577 11.8345C1.40935 12.0609 1.24241 12.3298 1.13556 12.6242C1.02872 12.9185 0.984322 13.2319 1.00518 13.5444C0.962467 14.2207 1.18509 14.887 1.62577 15.4018C1.85885 15.6285 2.1368 15.8039 2.44174 15.9168C2.74668 16.0297 3.07186 16.0774 3.39638 16.0571C3.91992 16.0704 4.43909 15.9588 4.91095 15.7316C5.33941 15.5197 5.70125 15.1939 5.95683 14.7899C5.95979 14.9696 5.98161 15.1485 6.02192 15.3237C6.05898 15.4752 6.11589 15.6211 6.19117 15.7577H8.38274V15.4018C8.2292 15.3292 8.10624 15.2047 8.03556 15.0503ZM5.90909 12.6331C5.91974 12.872 5.88177 13.1105 5.79747 13.3343C5.71318 13.5581 5.58432 13.7625 5.4187 13.935C5.23711 14.1011 5.0242 14.2292 4.79244 14.3119C4.56068 14.3946 4.31474 14.4303 4.06904 14.4167C3.7923 14.4328 3.52011 14.341 3.30958 14.1606C3.2141 14.0728 3.13898 13.9651 3.0895 13.8452C3.04002 13.7252 3.01738 13.5959 3.02316 13.4663C3.01003 13.2262 3.08921 12.9902 3.24449 12.8066C3.47149 12.6099 3.74734 12.4779 4.043 12.4247L4.73736 12.2729C5.14631 12.1867 5.54493 12.0572 5.92645 11.8866L5.90909 12.6331Z"
+                    fill="currentColor"></path>
+                <path
+                    d="M74.9026 13.8572C74.7766 13.9766 74.628 14.0696 74.4655 14.1307C74.303 14.1918 74.13 14.2198 73.9565 14.2131C73.7261 14.2222 73.4974 14.1699 73.2939 14.0617C73.0903 13.9534 72.9191 13.793 72.7978 13.5969C72.5044 13.0672 72.366 12.4656 72.3986 11.861C72.3557 11.2196 72.4893 10.5787 72.7848 10.0079C72.9072 9.80978 73.0804 9.6481 73.2865 9.53971C73.4926 9.43133 73.724 9.3802 73.9565 9.39165C74.3009 9.37451 74.638 9.49468 74.8939 9.72581C75.1482 9.98708 75.302 10.3299 75.3279 10.6936H77.4283C77.4167 10.2654 77.3193 9.84393 77.1419 9.45408C76.9645 9.06422 76.7107 8.71392 76.3955 8.42388C75.7043 7.85753 74.8273 7.56829 73.9348 7.61235C73.4223 7.58501 72.9101 7.67163 72.4351 7.86599C71.9601 8.06034 71.5341 8.3576 71.1878 8.73635C70.4788 9.60611 70.1226 10.7105 70.1896 11.8306C70.1237 12.951 70.4711 14.0566 71.1661 14.9378C71.5035 15.3134 71.9206 15.6089 72.3869 15.8026C72.8532 15.9963 73.3568 16.0834 73.8611 16.0575C74.7702 16.0951 75.6595 15.7847 76.3477 15.1895C77.0076 14.5709 77.3999 13.7192 77.4414 12.8157H75.3583C75.3178 13.2017 75.1586 13.5656 74.9026 13.8572Z"
+                    fill="currentColor"></path>
+                <path
+                    d="M85.5519 15.0503C85.4727 14.8128 85.4389 14.5625 85.452 14.3125V9.82524C85.467 9.49683 85.3946 9.17032 85.2421 8.87907C85.0896 8.58781 84.8625 8.34225 84.5841 8.16746C83.8094 7.73933 82.9288 7.54063 82.0454 7.59462C81.2003 7.54478 80.3642 7.79024 79.6802 8.28898C79.3959 8.51592 79.1692 8.80671 79.0183 9.13773C78.8675 9.46876 78.7969 9.83068 78.8122 10.1941V10.3417H80.7912V10.2245C80.7846 10.0847 80.812 9.94536 80.8709 9.81841C80.9299 9.69146 81.0186 9.58065 81.1297 9.49542C81.4216 9.30964 81.7651 9.22149 82.1105 9.24372C82.4549 9.2154 82.8002 9.28777 83.1042 9.45203C83.2085 9.53131 83.2907 9.63593 83.3431 9.75594C83.3955 9.87595 83.4164 10.0074 83.4037 10.1377C83.4037 10.537 82.9697 10.7973 82.0584 10.9145C81.7069 10.9579 81.4204 10.997 81.1904 11.0317C80.442 11.091 79.7278 11.3703 79.1377 11.8345C78.9213 12.0609 78.7544 12.3298 78.6475 12.6242C78.5407 12.9185 78.4963 13.2319 78.5171 13.5444C78.4744 14.2207 78.6971 14.887 79.1377 15.4018C79.371 15.6283 79.6489 15.8036 79.9538 15.9164C80.2587 16.0293 80.5838 16.0772 80.9083 16.0571C81.4275 16.0683 81.942 15.9568 82.4099 15.7316C82.8399 15.5203 83.2034 15.1945 83.4601 14.7899C83.4631 14.9696 83.4849 15.1485 83.5252 15.3237C83.5623 15.4752 83.6192 15.6211 83.6945 15.7577H85.8947V15.4018C85.7428 15.3284 85.6215 15.204 85.5519 15.0503ZM83.4254 12.6331C83.436 12.872 83.3981 13.1105 83.3138 13.3343C83.2295 13.5581 83.1006 13.7625 82.935 13.935C82.7534 14.1011 82.5405 14.2292 82.3087 14.3119C82.077 14.3946 81.831 14.4303 81.5853 14.4167C81.3086 14.4327 81.0364 14.341 80.8259 14.1606C80.7304 14.0728 80.6553 13.9651 80.6058 13.8452C80.5563 13.7252 80.5337 13.5959 80.5395 13.4663C80.5263 13.2262 80.6055 12.9902 80.7608 12.8066C80.981 12.6064 81.2506 12.4685 81.5419 12.4074L82.2363 12.2555C82.6454 12.17 83.0441 12.0405 83.4254 11.8693V12.6331Z"
+                    fill="currentColor"></path>
+                <path d="M89.6308 5.07324H87.5173V15.7707H89.6308V5.07324Z" fill="currentColor"></path>
+                <path d="M93.8664 5.07324H91.7529V15.7707H93.8664V5.07324Z" fill="currentColor"></path>
+                <path
+                    d="M99.2091 7.59488C98.7037 7.57015 98.1991 7.65773 97.7316 7.85133C97.2641 8.04493 96.8454 8.33973 96.5054 8.71453C95.8138 9.57109 95.463 10.6529 95.5203 11.7524C95.4584 12.8805 95.8154 13.9917 96.5228 14.8726C96.8607 15.2554 97.2802 15.5575 97.7504 15.7565C98.2206 15.9556 98.7294 16.0465 99.2395 16.0227C100.082 16.0478 100.91 15.7997 101.6 15.3153C102.255 14.8404 102.717 14.1457 102.902 13.3581H100.797C100.686 13.6306 100.494 13.8624 100.246 14.022C99.9742 14.1759 99.6647 14.2511 99.3523 14.239C99.1324 14.257 98.9112 14.2258 98.7048 14.1477C98.4984 14.0697 98.3119 13.9467 98.1589 13.7877C97.8606 13.3826 97.7077 12.8887 97.7249 12.386H102.989C102.989 12.3165 102.989 12.2471 102.989 12.169C102.989 12.0909 102.989 11.9824 102.989 11.8348C102.989 10.4765 102.659 9.43493 102 8.70152C101.642 8.32584 101.208 8.03229 100.726 7.84121C100.244 7.65013 99.7266 7.56608 99.2091 7.59488ZM97.7075 10.9929C97.7176 10.5485 97.88 10.1211 98.1676 9.78211C98.3069 9.63645 98.4758 9.52234 98.663 9.44748C98.8501 9.37262 99.0511 9.33875 99.2525 9.34814C99.4619 9.33656 99.6713 9.36923 99.8672 9.444C100.063 9.51877 100.241 9.63398 100.39 9.78211C100.679 10.1199 100.833 10.5526 100.823 10.9972L97.7075 10.9929Z"
+                    fill="currentColor"></path>
+                <path
+                    d="M109.751 8.8575C109.507 8.46772 109.166 8.14778 108.762 7.92879C108.341 7.7105 107.873 7.60015 107.399 7.60765C106.943 7.60086 106.493 7.70472 106.086 7.91031C105.68 8.11591 105.329 8.41711 105.064 8.78806C104.428 9.68093 104.109 10.761 104.157 11.8563C104.105 12.9426 104.425 14.0144 105.064 14.8941C105.337 15.2623 105.694 15.5595 106.106 15.7605C106.517 15.9614 106.971 16.0602 107.429 16.0484C107.895 16.0591 108.356 15.9485 108.766 15.7273C109.184 15.4749 109.537 15.1269 109.795 14.7118V15.7794H111.799V5.07324H109.751V8.8575ZM109.317 13.6008C109.172 13.8075 108.975 13.9735 108.748 14.0829C108.52 14.1923 108.268 14.2415 108.015 14.2258C107.763 14.2393 107.511 14.1888 107.283 14.0787C107.056 13.9687 106.86 13.8028 106.713 13.5965C106.384 13.0466 106.233 12.4086 106.279 11.7695C106.247 11.1651 106.408 10.5662 106.739 10.0596C106.88 9.86364 107.067 9.70532 107.283 9.59861C107.5 9.4919 107.739 9.44008 107.981 9.4477C108.23 9.43705 108.479 9.4867 108.706 9.59245C108.932 9.6982 109.13 9.85694 109.282 10.0553C109.625 10.5667 109.788 11.1771 109.747 11.7912C109.786 12.4247 109.633 13.0553 109.308 13.6008H109.317Z"
+                    fill="currentColor"></path>
+            </svg>
+        </div>
+        <div class="logo-beast">
+            <svg height="100%" viewBox="0 0 94 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1100_10745)">
+                    <path
+                        d="M13.5834 10.1955C14.3279 9.86775 14.9525 9.31742 15.3714 8.62018C15.7954 7.84464 16.0023 6.96907 15.9703 6.08577C15.9703 4.44535 15.435 3.19261 14.3646 2.32756C13.2941 1.4625 11.7376 1.02853 9.695 1.02563H0.282104V20.9884H9.39556C11.7101 20.9884 13.5038 20.4604 14.7768 19.4044C16.0498 18.3484 16.682 16.8483 16.6733 14.9041C16.7074 13.8779 16.4404 12.8641 15.9052 11.9878C15.3372 11.1628 14.5254 10.536 13.5834 10.1955V10.1955ZM4.22258 4.50177H8.88347C9.93803 4.50177 10.6975 4.66668 11.1531 4.9965C11.3893 5.18513 11.5752 5.42928 11.694 5.70719C11.8129 5.98509 11.8612 6.2881 11.8345 6.58918C11.8605 6.8999 11.81 7.21226 11.6875 7.49897C11.5649 7.78569 11.374 8.03803 11.1315 8.23394C10.6628 8.58402 9.92212 8.75905 8.90951 8.75905H4.22258V4.50177ZM11.6001 16.7659C11.075 17.1998 10.2418 17.3865 9.09612 17.3865H4.22258V12.1788H9.05706C10.2418 12.1788 11.0924 12.3871 11.6045 12.795C12.1166 13.2029 12.377 13.8799 12.377 14.8087C12.4071 15.1735 12.3517 15.5403 12.2154 15.88C12.079 16.2198 11.8654 16.5231 11.5915 16.7659H11.6001Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M23.8813 12.17H33.433V8.75892H23.8813V4.50163H34.327V1.03418H19.8323V20.9926H34.8174V17.3082H23.8813V12.17Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M45.2066 1.03418L38.1068 20.997H42.4466L43.7485 16.8916H51.4906L52.8446 20.997H57.1322L49.9369 1.03418H45.2066ZM44.8291 13.5109L47.5848 5.03108L50.3709 13.5109H44.8291Z"
+                        fill="currentColor"></path>
+                    <path
+                        d="M73.19 10.5339C72.683 10.254 72.1513 10.0216 71.6016 9.8395C70.9897 9.63553 69.9569 9.34477 68.503 8.97155L67.0666 8.62871C64.7984 8.12241 63.657 7.33402 63.6425 6.26355C63.6257 5.91543 63.6963 5.56864 63.8479 5.25481C63.9995 4.94098 64.2273 4.67011 64.5105 4.4669C65.2542 4.00464 66.1231 3.78476 66.9972 3.83764C68.0076 3.77375 69.0114 4.04032 69.857 4.59709C70.1939 4.8604 70.4682 5.19504 70.6603 5.57697C70.8523 5.9589 70.9574 6.37864 70.968 6.80602H74.9259C74.8535 4.80106 74.1606 3.24743 72.8471 2.14514C71.5336 1.04285 69.7138 0.491699 67.3877 0.491699C64.8909 0.491699 62.9843 1.00957 61.668 2.04533C60.3516 3.08108 59.6934 4.56816 59.6934 6.50658C59.6687 7.43848 59.8587 8.36357 60.2489 9.21024C60.6035 9.95711 61.1615 10.5889 61.8589 11.0329C62.6545 11.5421 63.9825 11.9992 65.8428 12.4043L66.2768 12.4954L66.3983 12.5258C69.8701 13.3185 71.606 14.321 71.606 15.5332C71.6251 15.8986 71.5516 16.2628 71.3923 16.5921C71.233 16.9214 70.993 17.205 70.6946 17.4167C70.087 17.8507 69.1887 18.0503 67.9996 18.0503C66.5979 18.0503 65.526 17.7899 64.7882 17.2605C64.4059 16.9716 64.0886 16.6055 63.8568 16.1861C63.6251 15.7667 63.4841 15.3033 63.4429 14.8259H59.3939C59.5039 16.9784 60.272 18.6362 61.6983 19.7992C63.1246 20.9623 65.0935 21.5409 67.6047 21.5351C70.1536 21.5351 72.1267 20.9565 73.5241 19.7992C74.9215 18.6419 75.6217 17.0319 75.6245 14.9691C75.6513 14.0396 75.4423 13.1184 75.017 12.2915C74.5878 11.5435 73.954 10.9337 73.19 10.5339V10.5339Z"
+                        fill="currentColor"></path>
+                    <path d="M77.5906 1.03418V4.59711H83.51V20.9926H87.6197V4.59711H93.5001V1.03418H77.5906Z"
+                        fill="currentColor"></path>
+                </g>
+            </svg>
+        </div>
+
+    </div>
+
+    <!-- <div class="comm">
+        BEASTHOOD PRODUCTIONS
+    </div> -->
+
+    <div class="main">
+
+        <div class="twitter-spaces">
+            #AKCB TWITTER SPACES
+        </div>
+
+        <div id="spaces">
+            ...
+        </div>
+    </div>
+
+    <div class="bagmi">
+        <div class="hash-bagmi">#BAGMI</div>
+        <div class="labs">A KID CALLED BLIMS PRODUCTION</div>
+        <div class="link"><a target="_blank" href="https://twitter.com/blims">@blims</a></div>
+    </div>
+
+    <div class="beasts">
+        <img src="beasts-tr2.png">
+    </div>
+
+</body>
+
+<script>
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const timezone_code = new Date().toLocaleTimeString('en-us', { timeZone: timezone, timeZoneName: 'short' }).split(' ')[2]
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    const link = 'https://twitter.com/i/spaces/'
+    const el_spaces = document.getElementById('spaces')
+
+    document.addEventListener("DOMContentLoaded", async (event) => {
+        console.log('%c#AKCB BEASTHOOD SPACES', 'color:#ff9900')
+        updateSpaces();
+        setInterval(() => {
+            updateSpaces();
+        }, 60000)
+    });
+
+    async function updateSpaces() {
+        const _spaces = await fetch('./AKCB_spaces.json')
+        const spaces = await _spaces.json()
+        // console.log(spaces);
+        if (spaces.length) {
+            el_spaces.replaceChildren()
+            spaces.forEach(space => {
+                // console.log(space.title)
+                // console.log(space.creator.name)
+                // console.log(space.state)
+                let _div = document.createElement('div')
+                _div.className = 'space' + (space.state === 'live' ? ' live' : '')
+                _div.innerHTML = `<div class="title"><a target="_blank" href="${link}${space.id}">${space.title}</a></div>`
+                _div.innerHTML += `<div class="host"><span>HOSTED BY</span><a title="@${space.creator.username}" target="_blank" href="https://twitter.com/${space.creator.username}">${space.creator.name}</a></div>`
+                if (space.hosts.length > 1) {
+                    _div.innerHTML += `<div class="co-hosts-head">CO-HOST${space.hosts.length - 1 === 1 ? '' : 'S'}</div>`
+                    space.hosts.forEach(_ch => {
+                        if (_ch.id !== space.creator.id) {
+                            _div.innerHTML += `<div class="co-host"><a title="@${_ch.username}" target="_blank" href="https://twitter.com/${_ch.username}">${_ch.name}</a></div>`
+                        }
+                    })
+                }
+                if (space.state === 'scheduled') {
+                    _div.innerHTML += `<div class="state">${space.state}</div>`
+                    const start = new Date(space.scheduled_start);
+                    const date_str = weekday[start.getDay()] + ', ' + month[start.getMonth()] + ' ' + start.getDate() + ' : ' + start.toLocaleTimeString('en-us', { hour: 'numeric', hour12: true, minute: 'numeric' }).toLowerCase() + ' ' + timezone_code
+                    _div.innerHTML += `<div class="starting">${date_str}</div>`
+                } else {
+                    _div.innerHTML += `<div class="participants"><span>LIVE</span>${space.participant_count} listeners</div>`
+                    _div.innerHTML += `<div class="started"><span>STARTED : </span>${ago(space.started_at)}</div>`
+                }
+                el_spaces.appendChild(_div)
+            });
+        } else {
+            el_spaces.replaceChildren()
+            let _div = document.createElement('div')
+            _div.className = 'space'
+            _div.innerHTML += `<div class="state">No spaces scheduled right now ...</div>`
+            el_spaces.appendChild(_div)
+        }
+    }
+
+    function ago(d) {
+        const seconds = Math.floor((+new Date() - +new Date(d)) / 1000);
+        if (seconds < 29) // less than 30 seconds ago will show as 'just now'
+            return 'just now';
+        const intervals = {
+            'year': 31536000,
+            'month': 2592000,
+            'week': 604800,
+            'day': 86400,
+            'hour': 3600,
+            'minute': 60,
+            'second': 1
+        };
+        let counter;
+        for (const i in intervals) {
+            counter = Math.floor(seconds / intervals[i]);
+            if (counter > 0)
+                return 'about ' + counter + ' ' + i + (counter === 1 ? '' : 's') + ' ago';
+        }
+    }
+
+</script>
+
+</html>
