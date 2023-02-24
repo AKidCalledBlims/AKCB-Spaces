@@ -213,7 +213,17 @@
             margin-bottom: 4px;
             color: #ffffcc;
         }
-    </style>
+        .cont {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .qrcode {
+            width: 100px;
+            height: 100px;
+        }
+     </style>
 </head>
 
 <body>
@@ -326,16 +336,32 @@
                 // console.log(space.state)
                 let _div = document.createElement('div')
                 _div.className = 'space' + (space.state === 'live' ? ' live' : '')
+
                 _div.innerHTML = `<div class="title"><a target="_blank" href="${link}${space.id}">${space.title}</a></div>`
-                _div.innerHTML += `<div class="host"><span>HOSTED BY</span><a title="@${space.creator.username}" target="_blank" href="https://twitter.com/${space.creator.username}">${space.creator.name}</a></div>`
+                let _cont = document.createElement('div')
+                _cont.className = 'cont'
+
+                let _qr = document.createElement('div')
+                _qr.className = 'qrcode'
+                _qr.title = 'Scan the QR code to go to the Twitter Space URL on mobile'
+                _qr.innerHTML += `<div class="qrcode">${space.svg}</div>`
+
+                let _info = document.createElement('div')
+                _info.className = 'info'
+                _info.innerHTML += `<div class="host"><span>HOSTED BY</span><a title="@${space.creator.username}" target="_blank" href="https://twitter.com/${space.creator.username}">${space.creator.name}</a></div>`
                 if (space.hosts.length > 1) {
-                    _div.innerHTML += `<div class="co-hosts-head">CO-HOST${space.hosts.length - 1 === 1 ? '' : 'S'}</div>`
+                    _info.innerHTML += `<div class="co-hosts-head">CO-HOST${space.hosts.length - 1 === 1 ? '' : 'S'}</div>`
                     space.hosts.forEach(_ch => {
                         if (_ch.id !== space.creator.id) {
-                            _div.innerHTML += `<div class="co-host"><a title="@${_ch.username}" target="_blank" href="https://twitter.com/${_ch.username}">${_ch.name}</a></div>`
+                            _info.innerHTML += `<div class="co-host"><a title="@${_ch.username}" target="_blank" href="https://twitter.com/${_ch.username}">${_ch.name}</a></div>`
                         }
                     })
                 }
+
+                _cont.appendChild(_qr)
+                _cont.appendChild(_info)
+                _div.appendChild(_cont)
+
                 if (space.state === 'scheduled') {
                     _div.innerHTML += `<div class="state">${space.state}</div>`
                     const start = new Date(space.scheduled_start);

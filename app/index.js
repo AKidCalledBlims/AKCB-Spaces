@@ -1,13 +1,14 @@
 require('dotenv').config();
 const fs = require('fs');
 const needle = require('needle');
-var CronJob = require('cron').CronJob;
+const CronJob = require('cron').CronJob;
+const QRCode = require("qrcode-svg");
 
 const token = process.env.BEARER_TOKEN;
 
 const endpointUrl = `https://api.twitter.com/2/spaces/search`;
 
-const _query = '#AKCB';
+const _query = 'AKCB';
 
 async function searchSpaces() {
     const params = {
@@ -47,9 +48,9 @@ async function searchSpaces() {
 async function updateSearch() {
     const response = await searchSpaces();
 
-    // console.dir(response, {
-    //     depth: null
-    // });
+    console.dir(response, {
+        depth: null
+    });
     let spaces = [];
     if (response.error || response?.data.length === 0) {
         return
@@ -73,6 +74,19 @@ async function updateSearch() {
         delete s.creator_id
         delete s.host_ids
         s.url = `https://twitter.com/i/spaces/${s.id}`
+
+        let _svg = 
+        s.svg = new QRCode({
+            content: s.url,
+            padding: 0,
+            width: 128,
+            height: 128,
+            color: "#cccccc",
+            background: "transparent",
+            join: true, 
+            ecl: "L",
+            container: "svg-viewbox"
+        }).svg().split('"').join('\'').split('\r\n').join('');
 
         if(s.state === 'live'){
             s.d = new Date(s.started_at).toUTCString()
